@@ -10,6 +10,17 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+
+    // Validate mobile number format (you can enhance this validation as needed)
+    if (!/^\+\d{1,3}\d{10}$/.test(mobileNumber)) {
+      // Display an alert if the mobile number is invalid
+      alert('Invalid mobile number format. Please enter a valid mobile number.');
+      return;
+    }
+
+
+
     // Call the API to get OTP
     const response = await fetch('/api/sign-in', {
       method: 'POST',
