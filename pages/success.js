@@ -12,10 +12,19 @@ const Success = () => {
     color: 'white', // Text color on top of the background
   };
 
+  const headingStyle = {
+    fontSize: '3em', // Adjust the font size for the heading
+    marginBottom: '20px', // Add some space between heading and paragraph
+  };
+
+  const paragraphStyle = {
+    fontSize: '1.5em', // Adjust the font size for the paragraph
+  };
+
   return (
     <div style={containerStyle}>
-      <h1>Success!</h1>
-      <p>Congratulations! You have successfully signed in.</p>
+      <h1 style={headingStyle}>Success!</h1>
+      <p style={paragraphStyle}>The tokens are there in browser console.</p>
     </div>
   );
 };
