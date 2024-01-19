@@ -6,6 +6,7 @@ export default function Validate() {
   const [otp, setOtp] = useState('');
   const { authData } = useAuth();
   const router = useRouter();
+  const backgroundImageUrl = 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,20 +42,81 @@ export default function Validate() {
     }
   };
 
-  return (
-    <div>
-      <h1>Validate OTP</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          OTP:
-          <input
-            type="text"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-          />
-        </label>
-        <button type="submit">Validate OTP</button>
-      </form>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <h1>Validate OTP</h1>
+//       <form onSubmit={handleSubmit}>
+//         <label>
+//           OTP:
+//           <input
+//             type="text"
+//             value={otp}
+//             onChange={(e) => setOtp(e.target.value)}
+//           />
+//         </label>
+//         <button type="submit">Validate OTP</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+
+const containerStyle = {
+  backgroundImage: `url(${backgroundImageUrl})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#5d1515',
+  textAlign: 'center',
+  padding: '20px',
+  fontFamily: 'Arial, sans-serif',
+};
+
+const formStyle = {
+  marginTop: '20px',
+  width: '300px',
+  padding: '20px',
+  border: '1px solid #ccc',
+  borderRadius: '8px',
+};
+
+const inputStyle = {
+  padding: '10px',
+  margin: '10px',
+  fontSize: '1em',
+};
+
+const buttonStyle = {
+  padding: '10px',
+  fontSize: '1em',
+  background: '#5d1515',
+  color: 'white',
+  cursor: 'pointer',
+};
+
+return (
+  <div style={containerStyle}>
+    <h1>Enter the simulated console OTP</h1>
+    <form style={formStyle} onSubmit={handleSubmit}>
+      <label>
+        Enter OTP:
+        <input
+          type="text"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
+          style={inputStyle}
+        />
+      </label>
+      <br />
+      <button type="submit" style={buttonStyle}>
+        Validate OTP
+      </button>
+    </form>
+  </div>
+);
+};
