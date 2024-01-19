@@ -10,6 +10,14 @@ export default function Validate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+
+    // Validate OTP (you can enhance this validation as needed)
+        if (!/^\d{6}$/.test(otp)) {
+          alert('Invalid OTP format. Please enter a valid OTP.');
+          return;
+        }
+
     // Call the API to validate OTP and get tokens
     const response = await fetch('/api/validate', {
       method: 'POST',
