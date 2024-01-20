@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../contexts/AuthContext';
+import Joi from 'joi'; // Import Joi
 
 const SignIn = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -8,19 +9,29 @@ const SignIn = () => {
   const router = useRouter();
   const backgroundImageUrl = 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D';
 
+  // Joi schema for mobile number validation
+  const mobileNumberSchema = Joi.string().pattern(/^\+\d{1,3}\d{10}$/).required();
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
 
 
-    // Validate mobile number format (you can enhance this validation as needed)
-    if (!/^\+\d{1,3}\d{10}$/.test(mobileNumber)) {
-      // Display an alert if the mobile number is invalid
-      alert('Invalid mobile number format. Please enter a valid mobile number.');
-      return;
-    }
+    // // Validate mobile number format
+    // if (!/^\+\d{1,3}\d{10}$/.test(mobileNumber)) {
+    //   // Display an alert if the mobile number is invalid
+    //   alert('Invalid mobile number format. Please enter a valid mobile number.');
+    //   return;
+    // }
 
-
+       // Validate mobile number using Joi schema
+       const validationResult = mobileNumberSchema.validate(mobileNumber);
+       if (validationResult.error) {
+         // Display an alert if the mobile number is invalid
+         alert(`Please enter a valid mobile number with countrycode.`);
+         return;
+       }
 
     // Call the API to get OTP
     const response = await fetch('/api/sign-in', {
