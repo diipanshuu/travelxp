@@ -1,8 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Documentation: Next.js Authentication App
+
+## Overview
+
+This Next.js Authentication App is designed to provide a seamless and secure user authentication experience. It includes features such as mobile number validation, OTP generation, and token-based authentication using JSON Web Tokens (JWT).
+
+## Table of Contents
+
+1. [Getting Started](#getting-started)
+   - [Installation](#installation)
+   - [Running the Development Server](#running-the-development-server)
+2. [Project Structure](#project-structure)
+   - [Pages](#pages)
+   - [API Routes](#api-routes)
+   - [Context](#context)
+   - [Utilities](#utilities)
+   - [Configuration Files](#configuration-files)
+3. [Dependencies](#dependencies)
+4. [Usage](#usage)
+   - [Home Page](#home-page)
+   - [Sign-In Page](#sign-in-page)
+   - [Validation Page](#validation-page)
+5. [Deployment](#deployment)
+6. [License](#license)
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+### Running the Development Server
 
 ```bash
 npm run dev
@@ -12,27 +45,67 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Pages
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **`index.js`**: Home page with information about the authentication app.
+- **`sign-in.js`**: Sign-in page for entering the mobile number.
+- **`validate.js`**: Validation page for entering the simulated OTP.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### API Routes
 
-## Learn More
+- **`api/sign-in.js`**: Simulates sign-in, generates, and stores a random OTP.
+- **`api/validate.js`**: Validates entered OTP, generates JWT tokens upon successful validation.
 
-To learn more about Next.js, take a look at the following resources:
+### Context
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`AuthContext.js`**: Manages authentication data (mobile number and OTP) using React context.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Utilities
 
-## Deploy on Vercel
+- **`db.js`**: Connects to MongoDB for database operations.
+- **`index.js` (in the utils folder)**: Utility function for generating random OTPs.
+- **`otpRepository.js`**: Manages OTP storage, retrieval, and deletion using MongoDB.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Configuration Files
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **`.env`**: Contains environment variables for access and refresh token secrets.
+- **`.gitignore`**: Specifies files and directories to be ignored by Git.
+- **`jsconfig.json`**: Configuration file for JavaScript projects.
+- **`next.config.js`**: Configuration file for Next.js.
+
+## Dependencies
+
+- `joi`: Validation library for mobile numbers and OTPs.
+- `jsonwebtoken`: Library for generating and verifying JWT tokens.
+- `memory-cache`: In-memory caching library.
+- `mongodb`: MongoDB driver for Node.js.
+- `next`: Next.js framework.
+- `react` and `react-dom`: React libraries.
+
+## Usage
+
+### Home Page
+
+The home page welcomes users and provides information about the authentication app. Users can click on the "Sign in" text to navigate to the sign-in page.
+
+### Sign-In Page
+
+On the sign-in page, users are required to enter their mobile number with the country code. The entered mobile number is validated using Joi, and if valid, an OTP is generated and stored in the database.
+
+### Validation Page
+
+The validation page prompts users to enter the simulated OTP shown in the console. The entered OTP is validated against the stored OTP, and upon successful validation, JWT tokens are generated.
+
+## Deployment
+
+The app is configured for deployment on the Vercel platform. You can deploy the app easily using the Vercel Platform.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
