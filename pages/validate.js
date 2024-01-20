@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../contexts/AuthContext';
+import Joi from 'joi';
 
 export default function Validate() {
   const [otp, setOtp] = useState('');
@@ -8,14 +9,16 @@ export default function Validate() {
   const router = useRouter();
   const backgroundImageUrl = 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D';
 
+   // Joi schema for OTP validation
+   const otpSchema = Joi.string().pattern(/^\d{6}$/).required();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-
-    // Validate OTP (you can enhance this validation as needed)
-        if (!/^\d{6}$/.test(otp)) {
-          alert('Invalid OTP format. Please enter a valid OTP.');
+        // Validate OTP using Joi schema
+        const validationResult = otpSchema.validate(otp);
+        if (validationResult.error) {
+          alert(`Invalid OTP! Please enter valid 6 digit OTP.`);
           return;
         }
 
@@ -41,25 +44,6 @@ export default function Validate() {
       console.error('Failed to validate OTP');
     }
   };
-
-//   return (
-//     <div>
-//       <h1>Validate OTP</h1>
-//       <form onSubmit={handleSubmit}>
-//         <label>
-//           OTP:
-//           <input
-//             type="text"
-//             value={otp}
-//             onChange={(e) => setOtp(e.target.value)}
-//           />
-//         </label>
-//         <button type="submit">Validate OTP</button>
-//       </form>
-//     </div>
-//   );
-// }
-
 
 const containerStyle = {
   backgroundImage: `url(${backgroundImageUrl})`,
