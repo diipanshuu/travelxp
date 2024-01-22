@@ -6,11 +6,15 @@
 
 
 import { AuthProvider } from '../contexts/AuthContext';
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <>
+        <Component {...pageProps} />
+        <Analytics />
+      </>
     </AuthProvider>
   );
 }
