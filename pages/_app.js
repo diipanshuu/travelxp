@@ -7,6 +7,7 @@
 
 import { AuthProvider } from '../contexts/AuthContext';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }) {
       <>
         <Component {...pageProps} />
         <Analytics />
+        <SpeedInsights />
       </>
     </AuthProvider>
   );
