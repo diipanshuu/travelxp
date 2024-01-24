@@ -17,9 +17,9 @@ const Home = () => {
     alignItems: 'center',
     color: '#dbd3d3',
     cursor: 'pointer',
-    textAlign: 'center', // Center-align text
-    padding: '20px', // Add padding for better spacing
-    fontFamily: 'Arial, sans-serif', // Use a reasonable font family
+    textAlign: 'center',
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif',
   };
 
   const handleSignInClick = () => {
@@ -28,9 +28,8 @@ const Home = () => {
 
   const signInTextStyle = {
     color: '#291b1b',
-    // textDecoration: 'underline',
-    fontSize: '2.0em', // Adjust font size for desktop
-    marginTop: '15px', // Add top margin for better spacing
+    fontSize: '2.0em',
+    marginTop: '15px',
   };
 
   return (
